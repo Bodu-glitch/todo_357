@@ -43,7 +43,7 @@
     /* The background property is added to clearly distinguish the borders between drawer and main
 content */
 
-    #drawer {
+    .drawer {
       padding: 12px;
       background: var(--md-sys-color-surface-container);
       width: 250px;
@@ -112,6 +112,4 @@ mat-toolbar[_ngcontent-ng-c4137870598] {
   width: 40px;
 }
 
-.mat-drawer-content ::ng-deep {
-  display: flex;
-}
+

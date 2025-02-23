@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {MatSidenav} from "@angular/material/sidenav";
 import {MaterialModule} from "../../shared/modules/material.module";
 import {DrawerService} from "../../services/drawer.service";
@@ -11,6 +11,8 @@ import {DrawerService} from "../../services/drawer.service";
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+  @Output() onToggleDrawer = new EventEmitter<string>();
+
   constructor(private drawerService: DrawerService) {}
 
   navLinks = [
@@ -59,7 +61,7 @@ export class SidebarComponent {
     },
   ];
 
-  toggleDrawer() {
-    this.drawerService.toggle();
+  toggleDrawer(drawerName:string) {
+    this.onToggleDrawer.emit(drawerName)
   }
 }

@@ -9,10 +9,19 @@
   </button>
   <mat-selection-list>
     @for (page of navLinks; track $index) {
-      <mat-list-item>
-        <mat-icon [fontIcon]="page.icon" class="icon"></mat-icon>
-        {{ page.name }}</mat-list-item
-      >
+      @if (page.name == 'Notifications' || page.name == 'Search') {
+        <mat-list-item (click)="toggleDrawer(page.name)" >
+          <mat-icon [fontIcon]="page.icon" class="icon"></mat-icon>
+          {{ page.name }}
+        </mat-list-item>
+
+      } @else {
+        <mat-list-item>
+          <mat-icon [fontIcon]="page.icon" class="icon"></mat-icon>
+          {{ page.name }}</mat-list-item
+        >
+      }
+
     }
   </mat-selection-list>
   <p class="section-title">
