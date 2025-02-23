@@ -5,23 +5,20 @@
 
   <div id="main-container" style="overflow-y: auto">
     <div id="content">
-      <mat-drawer-container id="drawer-container">
+      <mat-drawer-container id="drawer-container" (backdropClick)="resetActiveName()" >
         <mat-drawer
           #drawer
           mode="over"
           class="drawer"
         >
-          <app-search></app-search>
+          @if (activeDrawer == 'Search') {
+            <app-search></app-search>
+          }
+          @if (activeDrawer == 'Notifications') {
+            <app-notifications></app-notifications>
+          }
         </mat-drawer>
 
-        <mat-drawer
-         #drawerNoti
-         mode="over"
-         [opened]="false"
-         class="drawer"
-        >
-          <app-notifications></app-notifications>
-        </mat-drawer>
 
         <mat-drawer-content id="drawer-content">
           <div id="content-routing">

@@ -5,11 +5,12 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {SearchComponent} from './components/search/search.component';
 import {MatDrawer} from '@angular/material/sidenav';
 import {NotificationsComponent} from './components/notifications/notifications.component';
+import {NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MaterialModule, SidebarComponent, SearchComponent, NotificationsComponent],
+  imports: [RouterOutlet, MaterialModule, SidebarComponent, SearchComponent, NotificationsComponent, NgStyle],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -17,21 +18,34 @@ export class AppComponent {
   title = 'donezo_frontend';
 
   @ViewChild('drawer') drawer!: MatDrawer;
-  @ViewChild('drawerNoti') drawerNoti!: MatDrawer;
+
+  isDrawerOpen = false;
+  activeDrawer: string | null = null;
 
   constructor() {}
 
-  toggleDrawer(drawerName: string) {
-    if (drawerName === 'Search') {
-      if (this.drawerNoti.opened) {
-        this.drawerNoti.toggle()
+  toggleDrawer(drawerName:string) {
+    console.log(drawerName);
+    console.log(this.activeDrawer);
+    if (this.activeDrawer === drawerName) {
+      this.isDrawerOpen = false;
+      this.activeDrawer = null;
+      this.drawer.close()
+    } else if (drawerName == 'Search' || drawerName == 'Notifications') {
+      this.activeDrawer = drawerName;
+      this.isDrawerOpen = true;
+      if (!this.drawer.opened){
+        this.drawer.open();
       }
-      this.drawer.toggle();
     }else {
-      if (this.drawer.opened){
-        this.drawer.toggle()
-      }
-      this.drawerNoti.toggle()
+      this.isDrawerOpen = false;
+      this.activeDrawer = null;
+      this.drawer.close()
     }
+  }
+
+  resetActiveName() {
+    this.activeDrawer = null;
+    this.isDrawerOpen = false;
   }
 }

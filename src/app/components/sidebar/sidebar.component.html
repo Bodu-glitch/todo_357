@@ -16,7 +16,7 @@
         </mat-list-item>
 
       } @else {
-        <mat-list-item>
+        <mat-list-item (click)="toggleDrawer(page.name)" [routerLink]="page.route" >
           <mat-icon [fontIcon]="page.icon" class="icon"></mat-icon>
           {{ page.name }}</mat-list-item
         >
@@ -30,7 +30,7 @@
 
   <mat-selection-list>
     @for (board of boards; track $index) {
-      <mat-list-item>
+      <mat-list-item [routerLink]="['/kanban']">
         <img
           src="{{ board.background }}"
           alt="" class="background">
@@ -42,7 +42,7 @@
   <p class="section-title">Invited boards</p>
   <mat-selection-list>
     @for (board of invitedBoards; track $index) {
-      <mat-list-item>
+      <mat-list-item [routerLink]="['kanban']">
         <img
           src="{{ board.background }}"
           alt="" class="background">
